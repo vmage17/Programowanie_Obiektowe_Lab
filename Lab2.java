@@ -1,160 +1,127 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
-public class Lab2 {
+import static java.lang.Math.random;
 
-    static Scanner in = new Scanner(System.in);
+public class Main {
+
+    public static Scanner in = new Scanner(System.in);
+
     public static void main(String[] args) {
-        quadraticEquation();
-        order(6,4,1);
-        rainAndBus();
-        bonusAndDiscount();
-        calculator();
+        // Zad1
+        //sumAndMean(3, 5, 5);
+
+        // Zad2
+        //displayArrays();
+
+        // Zad3
+        //stringArrayToUpper();
+
+        // Zad4
+        //reverseSentence();
+
+        // Zad5
+        //bubbleSort();
+
+        // Zad6
+        //fiveFactorials();
+
+        // Zad 7
+        areTwoSentencesSame();
     }
 
-    // Lab2 zad1
-    public static void quadraticEquation() {
-        System.out.println("ax^2 + bx + c = 0");
-        System.out.println("Podaj a: ");
-        double a = in.nextDouble();
-        System.out.println("Podaj b: ");
-        double b = in.nextDouble();
-        System.out.println("Podaj c: ");
-        double c = in.nextDouble();
-        //System.out.println(Double.toString(a) + "*x^2 + " + Double.toString(b) + "*x + " + Double.toString(c) + " = 0");
-        if (a == 0 && b != 0) {
-            System.out.print("Rozwiązaniem równania kwadratowego jest: " + -c/b);
-            return;
-        }
-        if (a == 0 && b == 0 && c == 0) {
-            System.out.print("Równanie kwadratowe nie ma rozwiązań");
-            return;
-        }
-        double delta = b*b - 4*a*c;
-        if (delta < 0) {
-            System.out.print("Równanie kwadratowe nie ma rozwiązań");
-            return;
-        }
-        if (delta == 0) {
-            System.out.print("Rozwiązaniem równania kwadratowego jest: " + (-b/(2*a)));
-            return;
-        }
-        System.out.print("Rozwiązaniami równania kwadratowego są: " + (-b+Math.sqrt(delta))/(2*a) + " oraz " + (-b-Math.sqrt(delta))/(2*a));
+    // Zad1
+    public static double randomNumber(int min, int max) {
+        return Math.random()*(double)(max - min) + (double)min;
+    }
+    public static void sumAndMean(int min, int max, int size) {
+        double[] arr = new double[size];
+        for (int i = 0; i < arr.length; i++)
+            arr[i] = randomNumber(min, max);
+        double sum = 0.0;
+        for (var number : arr)
+            sum += number;
+        System.out.println(Arrays.toString(arr));
+        System.out.println("Suma: " + sum);
+        System.out.println("Średnia: " + sum/(double)size);
     }
 
-    // Lab2 zad2
-    public static double a(double x) {
-        if (x > 0)
-            return 2*x;
-        if (x == 0)
-            return 0;
-        return 3*x;
-    }
-    public static double b(double x) {
-        if (x >= 1)
-            return x*x;
-        return x;
-    }
-    public static double c(double x) {
-        if (x > 2)
-            return 2+x;
-        if (x == 2)
-            return 8;
-        return x-4;
+    //Zad2
+    public static void displayArrays() {
+        int[] arr1 = new int[10];
+        for (int i = 0; i < arr1.length; i++)
+            arr1[i] = (int)randomNumber(0, 11);
+        int[] arr2 = new int[11];
+        for (int i = 0; i < arr2.length; i++)
+            arr2[i] = (int)randomNumber(0, 11);
+        System.out.println("Pierwsza tablica: " + Arrays.toString(arr1));
+        System.out.println("Druga tablica: " + Arrays.toString(arr2));
+
+        for (int i = 0; i < arr1.length; i += 2)
+            System.out.print(arr1[i] + ", ");
+        System.out.println();
+        for (int i = 0; i < arr2.length; i += 2)
+            System.out.print(arr2[i] + ", ");
     }
 
-    // Lab2 zad3
-    public static void order(double x, double y, double z) {
-        if (x > y) {
-            double temp = x;
-            x = y;
-            y = temp;
-        }
-        if (y > z) {
-            double temp = z;
-            z = y;
-            y = temp;
-        }
-        if (x > y) {
-            double temp = x;
-            x = y;
-            y = temp;
-        }
-        System.out.println("(" + x + ", " + y + ", " + z + ")");
-    }
-
-    // Lab2 zad4
-    public static void  rainAndBus() {
-        boolean isRain = false;
-        boolean isBus = false;
-
-        System.out.println("Pada?");
-        String answer = in.nextLine();
-        if (answer.equals("tak"))
-            isRain = true;
-
-        System.out.println("Jest autobus?");
-        answer = in.nextLine();
-        if (answer.equals("tak"))
-            isBus = true;
-
-        if (isRain && isBus) {
-            System.out.println("Weź parasol");
-            System.out.println("Dostaniesz się na uczelnię");
-        }
-        if (isRain && !isBus) {
-            System.out.println("Nie dostaniesz się na uczelnię");
-        }
-        if (!isRain && isBus) {
-            System.out.println("Dostaniesz się na uczelnię");
-            System.out.println("Miłego dnia i pięknej pogody");
+    // Zad3
+    public static void stringArrayToUpper() {
+        String[] strArray = new String[] {"Ala", "ma", "dwa", "puszyste", "koty"};
+        for (String string : strArray) {
+            System.out.print(string.toUpperCase() + " ");
         }
     }
 
-    // Lab2 zad5
-    public static void  bonusAndDiscount() {
-        boolean isDiscount = false;
-        boolean isBonus = false;
-
-        System.out.println("Jest premia?");
-        String answer = in.nextLine();
-        if (answer.equals("tak"))
-            isBonus = true;
-
-        System.out.println("Jest zniżka na samochód?");
-        answer = in.nextLine();
-        if (answer.equals("tak"))
-            isDiscount = true;
-
-        if (!isDiscount || isBonus) {
-            System.out.println("Możesz kupić samochód!");
-            System.out.println("Zniżki na samochód nie ma");
-        }
-        if (!isDiscount || !isBonus) {
-            System.out.println("Zakup samochód trzeba odłożyć na później...");
-            System.out.println("Zniżki na samochód nie ma");
-        }
-        if (isDiscount || isBonus) {
-            System.out.println("Możesz kupić samochód!");
+    // Zad4
+    public static void reverseSentence() {
+        String[] strArray = new String[5];
+        for (int i = 0; i < strArray.length; i++)
+            strArray[i] = in.nextLine();
+        System.out.println(Arrays.toString(strArray));
+        for (int i = strArray.length - 1; i >= 0; i--) {
+            for (int j = strArray[i].length() - 1; j >= 0; j--)
+                System.out.print(strArray[i].charAt(j));
+            System.out.print(" ");
         }
     }
 
-    //Lab2 zad6
-    public static void  calculator() {
-        System.out.println("Podaj pierwszą liczbę: ");
-        double a = in.nextDouble();
-        System.out.println("Podaj drugą liczbę: ");
-        double b = in.nextDouble();
-        System.out.println("Podaj działanie (+, -, *, /, %): ");
-        char op = '+';//in.next().charAt(0);
-        if (op == '+')
-            System.out.print(a+b);
-        if (op == '-')
-            System.out.print(a-b);
-        if (op == '*')
-            System.out.print(a*b);
-        if (op == '/')
-            System.out.print(a/b);
-        if (op == '%')
-            System.out.print(a/b);
+    // Zad5
+    public static void bubbleSort() {
+        int[] arr = new int[8];
+        for (int i = 0; i < arr.length; i++)
+            arr[i] = in.nextInt();
+        for (int i = 1; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+        System.out.println("Posortowana tablica: " + Arrays.toString(arr));
+    }
+
+    // Zad6
+    public static int factorial(int num) {
+        int res = 1;
+        for (int i = 1; i <= num; i++)
+            res *= i;
+        return res;
+    }
+    public static void fiveFactorials() {
+        int[] arr = new int[5];
+        for (int i = 0; i < arr.length; i++)
+            arr[i] = in.nextInt();
+        for (int num : arr)
+            System.out.print(factorial(num) + " ");
+    }
+
+    // Zad7
+    public static boolean areTwoSentencesSame() {
+        String[] strArray1 = new String[] {"Ala", "ma", "dwa", "puszyste", "koty"};
+        String[] strArray2 = new String[] {"Ala", "ma", "dwa", "puszyste", "koty"};
+        // here
+        return true;
     }
 }
